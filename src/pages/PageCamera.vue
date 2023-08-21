@@ -11,6 +11,7 @@
     <div class="text-center q-pa-md">
       <!-- if -->
       <q-btn v-if="hasCameraSupport" @click="captureImage" round color="grey-10" icon="eva-camera" size="lg" />
+      
       <!-- else -->
       <q-file v-else label="Choose an image" outlined v-model="imageUpload" accept="image/*" @input="captureImageFallback">
         <template v-slot:prepend>
@@ -182,21 +183,9 @@ export default defineComponent({
       this.locationLoading = false;
     }
   },
-  /* setup() {
-    onMounted(() => {
-      this.initCamera();
-    });
-  } */
   mounted() {
     this.initCamera();
   },
-
-  /* onMounted(() => {
-    this.initCamera();
-  }) */
-  /* onMounted(){
-    this.initCamera();
-  } */
   beforeDestroy(){
     if(this.hasCameraSupport){
       this.disableCamera();
