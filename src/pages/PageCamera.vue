@@ -1,7 +1,13 @@
 <template>
   <q-page class="constrain-more q-pa-md">
     <div class="camera-frame q-pa-md">
-      <img class="full-width" src="https://cdn.quasar.dev/img/parallax2.jpg">
+      <!-- <img class="full-width" src="https://cdn.quasar.dev/img/parallax2.jpg"> -->
+      <video
+        ref="video"
+        class="full-width"
+        autoplay
+      >
+      </video>
     </div>
     <div class="text-center q-pa-md">
       <q-btn round color="grey-10" icon="eva-camera" size="lg" />
@@ -28,7 +34,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 import { uid } from 'quasar';
 
 export default defineComponent({
@@ -43,7 +49,32 @@ export default defineComponent({
         date: Date.now()
       }
     }
+  },
+  methods: {
+    initCamera(){
+      console.log('teste cam');
+      navigator.mediaDevices.getUserMedia({
+        video: true
+      }).then(stream => {
+        this.$refs.video.srcObject = stream;
+      });
+    }
+  },
+  /* setup() {
+    onMounted(() => {
+      this.initCamera();
+    });
+  } */
+  mounted(){
+    this.initCamera();
   }
+
+  /* onMounted(() => {
+    this.initCamera();
+  }) */
+  /* onMounted(){
+    this.initCamera();
+  } */
 })
 </script>
 
