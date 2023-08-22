@@ -8,6 +8,9 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
+let API_LOCAL = 'http://localhost:3000',
+    API_PRODUCTION = 'https://quasagram-backend.herokuapp.com';
+
 
 const { configure } = require('quasar/wrappers');
 
@@ -48,6 +51,11 @@ module.exports = configure(function (/* ctx */) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#build
     build: {
+      env: {
+        API: API_LOCAL // API_LOCAL | API_PRODUCTION
+        //API_PRODUCTION = 'https://quasagram-backend.herokuapp.com' -- se for feito com o heroku.com
+      },
+
       target: {
         browser: [ 'es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1' ],
         node: 'node16'
@@ -99,7 +107,7 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Notify', 'Dialog']
+      plugins: ['Notify', 'Dialog', 'Loading']
     },
 
     // animations: 'all', // --- includes all animations
