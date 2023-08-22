@@ -64,11 +64,6 @@
         encoding,
         mimeType
       );
-      /* file.on('data', (data) => {
-        console.log(`File [${name}] got ${data.length} bytes`);
-      }).on('close', () => {
-        console.log(`File [${name}] done`);
-      }); */
 
       // /tmp/4564564-234234.png
       let filepath = path.join(os.tmpdir(), filename);
@@ -77,13 +72,10 @@
     });
 
     bb.on('field', (name, val, info) => {
-      //console.log(`Field [${name}]: value: %j`, val);
       fields[name] = val;
     });
 
     bb.on('close', () => {
-      //console.log('fields: ' + fields);
-
       bucket.upload(
         fileData.filepath,
         {
@@ -113,11 +105,6 @@
           response.send('Post added: ' + fields.id)
         });
       }
-
-      //console.log('Done parsing form!');
-      //response.writeHead(303, { Connection: 'close', Location: '/' });
-      //response.end();
-      //response.send('Done parsing form');
     });
     request.pipe(bb);
   })

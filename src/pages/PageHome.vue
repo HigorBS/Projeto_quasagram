@@ -105,18 +105,17 @@ export default defineComponent({
     },
     getPosts(){
       this.loadingPosts = true;
-      //setTimeout(() => {
-        this.$axios.get(`${ process.env.API }/posts`).then(response => {
-          this.posts = response.data;
-          this.loadingPosts = false;
-        }).catch(err => {
-          this.$q.dialog({
-            title: 'Error',
-            message: 'Erro em trazer os dados.'
-          })
-          this.loadingPosts = false;
-        });
-      //}, 3000);
+      
+      this.$axios.get(`${ process.env.API }/posts`).then(response => {
+        this.posts = response.data;
+        this.loadingPosts = false;
+      }).catch(err => {
+        this.$q.dialog({
+          title: 'Error',
+          message: 'Erro em trazer os dados.'
+        })
+        this.loadingPosts = false;
+      });
     }
   },
   created(){
